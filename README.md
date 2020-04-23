@@ -36,6 +36,7 @@ public class StaticExampleMenu extends MenuImpl {
                         .addBlankLore()
                         .build())
                 .setClickConsumer(clickEvent -> clickEvent.getPlayer().damage(5)));
+        setIndex(3, new ItemMenu(new ItemStack(Material.SKULL_ITEM)));
     }
 
     private ChatColor getRandomColor(){
@@ -113,12 +114,32 @@ public class PaginatedExampleMenu extends PaginatedMenu {
 ```
 Для создания анимации достаточно
 ```java
-lib.scheduler.asyncRepeating(this, () -> {
+    lib.scheduler.asyncRepeating(this, () -> {
             for (Player : getServer().getOnlinePlayers()) {
                 InventoryHolder holder = player.getOpenInventory().getTopInventory().getHolder()
                 if (holder instanceof AbstractMenu.MenuHolder) {
                     ((AbstractMenu.MenuHolder)holder).update()
                 }
             }
-}, Duration.ofSeconds(1),  Duration.ofSeconds(1))
+    }, Duration.ofSeconds(1),  Duration.ofSeconds(1))
+```
+Так же можно добавить меню как кнопку в другое меню, если наследовать интерфейс MenuItem
+```java
+public static class ItemMenu extends MenuImpl implements MenuItem{
+        private final ItemStack icon;
+
+        public ItemMenu(ItemStack icon) {
+            this.icon = icon;
+        }
+
+        @Override
+        public ItemStack update(Player player) {
+            return icon;
+        }
+
+        @Override
+        public void onClick(InventoryClickEvent event) {
+            open((Player) event.getWhoClicked());
+        }
+    }
 ```
