@@ -141,5 +141,5 @@ public static class ItemMenu extends MenuImpl implements MenuItem{
         public void onClick(InventoryClickEvent event) {
             open((Player) event.getWhoClicked());
         }
-    }
+}
 ```
