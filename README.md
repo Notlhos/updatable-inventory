@@ -65,7 +65,7 @@ public class DinamicExampleMenu extends MenuImpl {
 
     @Override
     public void init() {
-        setDisplayName(ChatColor.RED + "Статическое меню");
+        setDisplayName(ChatColor.RED + "Персональное меню");
         int index = 0;
         for(ItemStack item : owner.getInventory().getContents()){
             if(item != null && item.getType() != Material.AIR){
