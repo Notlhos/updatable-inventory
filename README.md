@@ -4,7 +4,9 @@
 
 ------------
 **Что можно сделать с помощью этого апи:**
+
 &bull; Статические инвентари для общего использования, так же можно добавить функцию обновления данных в инвентаре
+
 &bull; Динамические инвентари для каждого игрока с возможностью обновлять данные
 
 На примере показано как созадть статический инвентарь
@@ -108,4 +110,15 @@ public class PaginatedExampleMenu extends PaginatedMenu {
         this.pages.addAll(pages); // Добавить страницы
     }
 }
+```
+Для создания анимации достаточно
+```java
+lib.scheduler.asyncRepeating(this, () -> {
+            for (Player : getServer().getOnlinePlayers()) {
+                InventoryHolder holder = player.getOpenInventory().getTopInventory().getHolder()
+                if (holder instanceof AbstractMenu.MenuHolder) {
+                    ((AbstractMenu.MenuHolder)holder).update()
+                }
+            }
+}, Duration.ofSeconds(1),  Duration.ofSeconds(1))
 ```
